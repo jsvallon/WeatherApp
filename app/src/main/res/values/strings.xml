@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">WeatherAppChallenge</string>
+    <string name="feature_search_title">Search</string>
+
+
+    <!-- Global Weather Text -->
+    <string name="rlmv_weather_global_text_loading_title">Loading</string>
+    <string name="rlmv_weather_global_text_loading_message">Please wait…</string>
+    <string name="rlmv_weather_search_hint">Enter City Name</string>
+    <string name="rlmv_weather_clear_search_text_content_desc">Clear search text</string>
+
+    <!-- Global Core Weather Text -->
+    <string name="core_ui_back">Back</string>
+
+    <string name="rlmv_weather_result_not_found">Sorry, no content was found for your search \"%1$s\"</string>
+    <string name="rlmv_weather_search">Weather</string>
+    <string name="rlmv_weather_try_another_search">Try another search or browser </string>
+    <string name="rlmv_weather_search_to_browse">Browse the list</string>
+    <string name="rlmv_weather_search_not_ready">Sorry, we are still processing the search index. Please come back later</string>
+    <string name="rlmv_weather_search_results">Search result</string>
+</resources>
