@@ -19,7 +19,12 @@ import com.llcvmlr.weatherappchallenge.framework.model.WeatherResponse
 import com.llcvmlr.weatherappchallenge.framework.uix.SearchResultUiState
 import com.llcvmlr.weatherappchallenge.ui.theme.WeatherAppChallenegTheme
 
-
+/**
+ * A Composable function that displays a weather item with an icon, temperature, and description.
+ *
+ * @param weatherResponse The [WeatherResponse] object containing weather details to display.
+ * @param modifier Optional [Modifier] for customizing the layout and appearance of the weather item.
+ */
 @Composable
 fun WeatherItem(
     weatherResponse: WeatherResponse,
@@ -29,31 +34,32 @@ fun WeatherItem(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally // Ensures content is centered horizontally
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Weather icon at the top
+        // Display the weather icon at the top
         Image(
             painter = rememberAsyncImagePainter(
                 "https://openweathermap.org/img/wn/${weatherResponse.weather.first().icon}@2x.png"
             ),
             contentDescription = null,
             modifier = Modifier
-                .size(64.dp) // Adjust size if needed
-                .padding(bottom = 8.dp) // Space between image and text
+                .size(64.dp) // Set the size of the icon
+                .padding(bottom = 8.dp) // Space below the icon
         )
 
-        // Weather details below the icon
-        Text(weatherResponse.name)
-        Text("${weatherResponse.main.temp}°C")
-        Text(weatherResponse.weather.first().description)
+        // Display the weather details below the icon
+        Text(text = weatherResponse.name) // Location name
+        Text(text = "${weatherResponse.main.temp}°C") // Temperature in Celsius
+        Text(text = weatherResponse.weather.first().description) // Weather description
     }
 }
 
-
-
+/**
+ * Preview for the [WeatherItem] composable, using sample data from [SearchUiStatePreviewParameterProvider].
+ */
 @DevicePreviews
 @Composable
-private fun InterestsCardWithEmptyDescriptionPreview(
+private fun WeatherItemPreview(
     @PreviewParameter(SearchUiStatePreviewParameterProvider::class)
     searchResultUiState: SearchResultUiState.Success
 ) {

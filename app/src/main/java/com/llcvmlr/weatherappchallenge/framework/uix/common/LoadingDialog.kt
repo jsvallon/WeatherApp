@@ -1,6 +1,5 @@
 package com.llcvmlr.weatherappchallenge.framework.uix.common
 
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,6 +17,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.llcvmlr.weatherappchallenge.ui.theme.WeatherAppChallenegTheme
 
+/**
+ * A composable that displays a loading dialog with an optional title and message.
+ *
+ * @param showDialog Boolean flag to control the visibility of the dialog.
+ * @param onDismissRequest Callback invoked when the dialog is dismissed.
+ * @param title Optional title to display at the top of the dialog.
+ * @param showTitle Boolean flag to control whether the title is shown. Default is true.
+ * @param message Optional message to display below the title.
+ */
 @Composable
 fun LoadingDialog(
     showDialog: Boolean = false,
@@ -68,6 +76,9 @@ fun LoadingDialog(
 }
 
 
+/**
+ * Preview of the [LoadingDialog] composable with title and message visible.
+ */
 @Preview
 @Composable
 fun PreviewLoadingDialog() {
@@ -81,6 +92,9 @@ fun PreviewLoadingDialog() {
     }
 }
 
+/**
+ * Preview of the [LoadingDialog] composable with title hidden.
+ */
 @Preview
 @Composable
 fun PreviewLoadingDialogHideTitle() {

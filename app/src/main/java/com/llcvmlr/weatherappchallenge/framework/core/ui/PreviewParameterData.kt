@@ -8,9 +8,48 @@ import com.llcvmlr.weatherappchallenge.framework.model.Weather
 import com.llcvmlr.weatherappchallenge.framework.model.WeatherResponse
 import com.llcvmlr.weatherappchallenge.framework.model.Wind
 
-
+/**
+ * A singleton object that provides mock data for previewing UI components
+ * in the Weather App.
+ *
+ * This object contains sample data used for testing and previewing UI components
+ * in Jetpack Compose. The mock data is designed to resemble a typical response
+ * from the weather API to facilitate UI development without requiring actual API calls.
+ *
+ * The mock data is structured as follows:
+ *
+ * - [mockWeatherResponse]: An instance of [WeatherResponse] containing
+ *   sample data for weather-related information.
+ *
+ * Example usage:
+ * ```
+ * @Preview
+ * @Composable
+ * fun WeatherScreenPreview() {
+ *     WeatherScreen(weatherResponse = PreviewParameterData.mockWeatherResponse)
+ * }
+ * ```
+ *
+ * The mock data includes:
+ * - [Coord]: Coordinates with longitude and latitude.
+ * - [Weather]: A list of weather conditions with an ID, main description, detailed description, and icon code.
+ * - [Main]: Main weather data including temperature (in Kelvin), pressure, humidity, and temperature range.
+ * - [Wind]: Wind data with speed and direction.
+ * - [Clouds]: Cloud coverage percentage.
+ * - [Sys]: System-related data including country code, sunrise and sunset times.
+ * - Other fields such as visibility, timestamp, location ID, and location name.
+ *
+ * @see WeatherResponse
+ * @see Coord
+ * @see Weather
+ * @see Main
+ * @see Wind
+ * @see Clouds
+ * @see Sys
+ */
 object PreviewParameterData {
 
+    // Sample mock weather response for previewing UI components
     val mockWeatherResponse = WeatherResponse(
         coord = Coord(
             lon = -0.13,
@@ -26,7 +65,7 @@ object PreviewParameterData {
         ),
         base = "stations",
         main = Main(
-            temp = 280.32,  // In Kelvin
+            temp = 280.32,  // Temperature in Kelvin
             pressure = 1012,
             humidity = 81,
             temp_min = 279.15,

@@ -62,7 +62,13 @@ import com.llcvmlr.weatherappchallenge.framework.uix.common.LoadingDialog
 import com.llcvmlr.weatherappchallenge.ui.theme.WeatherAppChallenegTheme
 import com.llcvmlr.weatherappchallenge.util.WeatherConstant
 
-
+/**
+ * Composable function that sets up the search screen for the Weather App.
+ * Handles the loading state and displays the [SearchScreen] composable.
+ *
+ * @param modifier [Modifier] to apply to the `SearchRoute`.
+ * @param searchViewModel [SearchViewModel] used to manage search queries and results.
+ */
 @Composable
 internal fun SearchRoute(
     modifier: Modifier = Modifier,
