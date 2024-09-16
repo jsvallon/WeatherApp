@@ -1,4 +1,4 @@
-package com.llcvmlr.weatherappchallenge.framework.uix.common
+package com.llcvmlr.weatherappchallenge.framework.uix.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

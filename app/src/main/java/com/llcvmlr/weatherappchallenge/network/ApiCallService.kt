@@ -23,7 +23,7 @@ interface ApiCallService {
      * @param appid The API key used for authentication with the weather service.
      * @return A [Deferred] object containing the [Response] with the [WeatherResponse] for the requested city.
      */
-    @GET(NetWorkConstant.WEATHER)
+    @GET(NetWorkConstant.WEATHER_ENDPOINT)
     fun getWeatherByCity(
         @Query("q") query: String,
         @Query("appid") appid: String
@@ -37,7 +37,7 @@ interface ApiCallService {
      * @param apiKey The API key used for authentication with the weather service.
      * @return A [Deferred] object containing the [Response] with the [WeatherResponse] for the requested coordinates.
      */
-    @GET(NetWorkConstant.WEATHER)
+    @GET(NetWorkConstant.WEATHER_ENDPOINT)
     fun getWeatherByLocation(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
