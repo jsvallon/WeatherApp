@@ -15,13 +15,17 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -35,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -52,6 +57,7 @@ import androidx.compose.ui.unit.dp
 import com.llcvmlr.weatherappchallenge.framework.uix.viewmodel.SearchViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.llcvmlr.weatherappchalleneg.R
+import com.llcvmlr.weatherappchallenge.base.WeatherTopAppBar
 import com.llcvmlr.weatherappchallenge.framework.core.DevicePreviews
 import com.llcvmlr.weatherappchallenge.framework.core.SearchUiStatePreviewParameterProvider
 import com.llcvmlr.weatherappchallenge.framework.domain.WeatherItem
@@ -69,32 +75,47 @@ import com.llcvmlr.weatherappchallenge.util.WeatherConstant
  * @param modifier [Modifier] to apply to the `SearchRoute`.
  * @param searchViewModel [SearchViewModel] used to manage search queries and results.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SearchRoute(
     modifier: Modifier = Modifier,
     searchViewModel: SearchViewModel
 ) {
-
+    val topAppBarState = rememberTopAppBarState()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
     val searchResultUiState by searchViewModel.searchResults.collectAsStateWithLifecycle()
     val searchQuery by searchViewModel.searchQuery.collectAsStateWithLifecycle()
     val isLoading by searchViewModel.isLoading.observeAsState(false)
 
-     // Loading dialog setup
-    LoadingDialog(
-        showDialog = isLoading,
-        onDismissRequest = { searchViewModel.stopLoading() },
-        title = stringResource(id = R.string.rlmv_weather_global_text_loading_title),
-        message = stringResource(id = R.string.rlmv_weather_global_text_loading_message)
-    )
+    Scaffold(
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            WeatherTopAppBar(
+                title = stringResource(id = R.string.rlmv_weather_home_page),
+                scrollBehavior = scrollBehavior,
+                backgroundColor = MaterialTheme.colorScheme.surfaceVariant
+            )
+        }
+    ) { innerPadding ->
+        // Loading dialog setup
+        LoadingDialog(
+            showDialog = isLoading,
+            onDismissRequest = { searchViewModel.stopLoading() },
+            title = stringResource(id = R.string.rlmv_weather_global_text_loading_title),
+            message = stringResource(id = R.string.rlmv_weather_global_text_loading_message)
+        )
 
-     SearchScreen(
-         modifier = modifier,
-         onSearchQueryChanged = searchViewModel::onSearchQueryChanged,
-         onSearchTriggered = searchViewModel::onSearchTriggered,
-         searchQuery = searchQuery,
-         searchResultUiState = searchResultUiState
-     )
+        SearchScreen(
+            modifier = modifier
+                .padding(innerPadding),
+            onSearchQueryChanged = searchViewModel::onSearchQueryChanged,
+            onSearchTriggered = searchViewModel::onSearchTriggered,
+            searchQuery = searchQuery,
+            searchResultUiState = searchResultUiState
+        )
+    }
 }
+
 
 @Composable
 internal fun SearchScreen(
@@ -114,13 +135,11 @@ internal fun SearchScreen(
             background(MaterialTheme.colorScheme.primaryContainer)
         ) {
             Spacer(modifier = Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
-            SearchToolbar(
+            Search(
                 onSearchQueryChanged = onSearchQueryChanged,
                 searchQuery = searchQuery,
                 onSearchTriggered = onSearchTriggered
             )
-
-            println("SearchViewModel searchResultUiState : $searchResultUiState")
 
             when (searchResultUiState) {
                 is SearchResultUiState.Loading -> {
@@ -164,7 +183,7 @@ internal fun SearchScreen(
 }
 
 @Composable
-private fun SearchToolbar(
+private fun Search(
     modifier: Modifier = Modifier,
     onSearchQueryChanged: (String) -> Unit,
     searchQuery: String = "",
@@ -359,7 +378,7 @@ fun SearchResultBody(
 @Composable
 private fun SearchToolbarPreview() {
     WeatherAppChallenegTheme {
-        SearchToolbar(
+        Search(
             onSearchQueryChanged = {},
             onSearchTriggered = {},
         )

@@ -1,7 +1,21 @@
 package com.llcvmlr.weatherappchallenge.base
 
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.llcvmlr.weatherappchallenge.framework.uix.navigation.WeatherAppNavHost
 import com.llcvmlr.weatherappchallenge.framework.uix.viewmodel.SearchViewModel
 
@@ -34,4 +48,39 @@ fun WeatherEntryApp(
         navController = navController,
         searchViewModel = searchViewModel
     )
+}
+
+/**
+ * App bar to display title and conditionally display the back navigation.
+ */
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun WeatherTopAppBar(
+    title: String,
+    modifier: Modifier = Modifier,
+    scrollBehavior: TopAppBarScrollBehavior? = null,
+    backgroundColor: Color = MaterialTheme.colorScheme.primary
+) {
+    Extracted()
+    CenterAlignedTopAppBar(
+        title = { Text(text = title) },
+        modifier = modifier,
+        scrollBehavior = scrollBehavior,
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = backgroundColor
+        )
+    )
+}
+
+@Composable
+private fun Extracted() {
+    val systemUiController = rememberSystemUiController()
+    val backgroundColorStatus = MaterialTheme.colorScheme.surfaceVariant
+    SideEffect {
+        systemUiController.setStatusBarColor(
+            color = backgroundColorStatus,
+            darkIcons = true
+        )
+    }
 }

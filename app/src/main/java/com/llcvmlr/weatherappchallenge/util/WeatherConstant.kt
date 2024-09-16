@@ -35,4 +35,19 @@ object WeatherConstant {
      * A message displayed when the weather permission is denied.
      */
     const val WEATHER_PERMISSION_DENIED: String = "Permission Denied"
+
+    /**
+     * A message displayed when the is no weather description.
+     */
+    const val WEATHER_NO_DESCRIPTION: String = "No description available"
+
+    /**
+     * A constant that show the weather in C
+     */
+    const val WEATHER_CELSIUS: String = "°C"
+
+    /**
+     * A constant that show the weather in F
+     */
+    const val WEATHER_FAHRENHEIT: String = "°F"
 }

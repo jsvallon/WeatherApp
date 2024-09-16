@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name">WeatherAppChallenge</string>
     <string name="feature_search_title">Search</string>
+    <string name="rlmv_weather_home_page">Home</string>
 
 
     <!-- Global Weather Text -->
     <string name="rlmv_weather_global_text_loading_title">Loading</string>
     <string name="rlmv_weather_global_text_loading_message">Please wait…</string>
-    <string name="rlmv_weather_search_hint">Enter City Name</string>
+    <string name="rlmv_weather_search_hint">Enter city name</string>
     <string name="rlmv_weather_clear_search_text_content_desc">Clear search text</string>
 
     <!-- Global Core Weather Text -->
     <string name="core_ui_back">Back</string>
-
     <string name="rlmv_weather_result_not_found">Sorry, no content was found for your search \"%1$s\"</string>
     <string name="rlmv_weather_search">Weather</string>
     <string name="rlmv_weather_try_another_search">Try another search or browser </string>
